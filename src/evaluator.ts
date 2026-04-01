@@ -25,6 +25,7 @@ import { maybeEmitAzureOpenAiWarning } from './providers/azure/warnings';
 import { providerRegistry } from './providers/providerRegistry';
 import { isPromptfooSampleTarget } from './providers/shared';
 import { redteamProviderManager } from './redteam/providers/shared';
+import { throwIfTargetPromptExceedsMaxChars } from './redteam/shared/promptLength';
 import { getSessionId } from './redteam/util';
 import {
   createProviderRateLimitOptions,
@@ -513,6 +514,7 @@ export async function runEval({
       provider,
       skipRenderVars,
     );
+    throwIfTargetPromptExceedsMaxChars(renderedPrompt, testSuite?.redteam?.maxCharsPerMessage);
     // Prompt functions may have updated promptForRender.config during render.
     mergedPromptConfig = {
       ...(promptForRender.config ?? {}),

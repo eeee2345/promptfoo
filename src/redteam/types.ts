@@ -187,6 +187,7 @@ type CommonOptions = {
   sharing?: boolean;
   excludeTargetOutputFromAgenticAttackGeneration?: boolean;
   testGenerationInstructions?: string;
+  maxCharsPerMessage?: number;
   maxConcurrency?: number;
   tracing?: TracingConfig;
 };
@@ -282,6 +283,7 @@ export interface SavedRedteamConfig {
   frameworks?: FrameworkComplianceId[];
   extensions?: string[];
   numTests?: number;
+  maxCharsPerMessage?: number;
   maxConcurrency?: number;
   language?: string | string[];
   provider?: string | ProviderOptions;
