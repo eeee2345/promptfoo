@@ -514,7 +514,9 @@ export async function runEval({
       provider,
       skipRenderVars,
     );
-    throwIfTargetPromptExceedsMaxChars(renderedPrompt, testSuite?.redteam?.maxCharsPerMessage);
+    if (isRedteam) {
+      throwIfTargetPromptExceedsMaxChars(renderedPrompt, testSuite?.redteam?.maxCharsPerMessage);
+    }
     // Prompt functions may have updated promptForRender.config during render.
     mergedPromptConfig = {
       ...(promptForRender.config ?? {}),
